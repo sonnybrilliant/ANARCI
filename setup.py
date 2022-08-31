@@ -13,7 +13,7 @@ if os.path.isdir("build"):
 from distutils.core import setup
 
 setup(name='anarci',
-      version='1.3.1',
+      version='1.3',
       description='Antibody Numbering and Receptor Classification',
       author='Mfana Ronald Conco',
       author_email='ronald@creativecloud.co.za',

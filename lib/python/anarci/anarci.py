@@ -535,6 +535,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", ncpu=None, bit_score_threshold=
     logging.debug(output_filehandle)
     logging.debug(output_filename)
     hmmer_path = HMM_PATH_CONDA
+    hmmer_path = None
     logging.debug("run_hmmer:3====================================================================")
     # Run hmmer as a subprocess
     if hmmer_path:

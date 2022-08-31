@@ -13,10 +13,10 @@ if os.path.isdir("build"):
 from distutils.core import setup
 
 setup(name='anarci',
-      version='1.3',
-      description='Antibody Numbering and Receptor ClassIfication',
-      author='James Dunbar',
-      author_email='opig@stats.ox.ac.uk',
+      version='1.3.1',
+      description='Antibody Numbering and Receptor Classification',
+      author='Mfana Ronald Conco',
+      author_email='ronald@creativecloud.co.za',
       url='http://opig.stats.ox.ac.uk/webapps/ANARCI',
       packages=['anarci'], 
       package_dir={'anarci': 'lib/python/anarci'},

@@ -505,7 +505,7 @@ def parse_hmmer_output(filedescriptor="", bit_score_threshold=80, hmmer_species=
     return results
 
 
-def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_score_threshold=80, hmmer_species=None):
+def run_hmmer(sequence_list, hmm_database="ALL", ncpu=None, bit_score_threshold=80, hmmer_species=None):
     """
     Run the sequences in sequence list against a precompiled hmm_database.
 
@@ -519,7 +519,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
     @param hmmerpath: The path to hmmer binaries if not in the path
     @param ncpu: The number of cpu's to allow hmmer to use.
     """
-    logging.debug("1111111111111111111111111111111====================================================================")
+    logging.debug("run_hmmer:1====================================================================")
     # Check that hmm_database is available
 
     assert hmm_database in ["ALL"], "Unknown HMM database %s" % hmm_database
@@ -530,24 +530,34 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
     fasta_filehandle, fasta_filename = tempfile.mkstemp(".fasta", text=True)
     with os.fdopen(fasta_filehandle, 'w') as outfile:
         write_fasta(sequence_list, outfile)
-
+    logging.debug("run_hmmer:2====================================================================")
     output_filehandle, output_filename = tempfile.mkstemp(".txt", text=True)
-
-    hmmerpath = HMM_PATH_CONDA
-
+    logging.debug(output_filehandle)
+    logging.debug(output_filename)
+    hmmer_path = HMM_PATH_CONDA
+    logging.debug("run_hmmer:3====================================================================")
     # Run hmmer as a subprocess
-    if hmmerpath:
-        logging.debug("====================================================================")
-        hmmscan = os.path.join(hmmerpath, "hmmscan")
+    if hmmer_path:
+        logging.debug("run_hmmer:4====================================================================")
+        hmm_scan = os.path.join(hmmer_path, "hmmscan")
+        logging.debug("run_hmmer:5====================================================================" + hmm_scan)
     else:
-        hmmscan = "hmmscan"
+        hmm_scan = "hmmscan"
     try:
         if ncpu is None:
-            command = [hmmscan, "-o", output_filename, HMM, fasta_filename]
+            command = [hmm_scan, "-o", output_filename, HMM, fasta_filename]
+            logging.debug("run_hmmer:6====================================================================")
         else:
-            command = [hmmscan, "-o", output_filename, "--cpu", str(ncpu), HMM, fasta_filename]
+            command = [hmm_scan, "-o", output_filename, "--cpu", str(ncpu), HMM, fasta_filename]
+            logging.debug("run_hmmer:7====================================================================")
         process = Popen(command, stdout=PIPE, stderr=PIPE, shell=True)
         _, pr_stderr = process.communicate()
+
+        logging.debug("run_hmmer:8====================================================================")
+        logging.debug("run_hmmer:8:1====================================================================")
+        logging.debug(_)
+        logging.debug("run_hmmer:8:2====================================================================")
+        logging.debug(pr_stderr)
 
         if pr_stderr:
             _f = os.fdopen(
@@ -557,6 +567,9 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
             raise HMMscanError(pr_stderr)
         results = parse_hmmer_output(output_filehandle, bit_score_threshold=bit_score_threshold,
                                      hmmer_species=hmmer_species)
+
+        logging.debug("run_hmmer:9====================================================================")
+        logging.debug(results)
 
     finally:
         # clear up

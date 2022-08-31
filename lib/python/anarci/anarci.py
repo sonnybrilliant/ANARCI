@@ -505,7 +505,7 @@ def parse_hmmer_output(filedescriptor="", bit_score_threshold=80, hmmer_species=
     return results
 
 
-def run_hmmer(sequence_list, hmm_database="ALL", ncpu=None, bit_score_threshold=80, hmmer_species=None):
+def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_score_threshold=80, hmmer_species=None):
     """
     Run the sequences in sequence list against a precompiled hmm_database.
 
@@ -534,13 +534,13 @@ def run_hmmer(sequence_list, hmm_database="ALL", ncpu=None, bit_score_threshold=
     output_filehandle, output_filename = tempfile.mkstemp(".txt", text=True)
     logging.debug(output_filehandle)
     logging.debug(output_filename)
-    hmmer_path = HMM_PATH_CONDA
-    hmmer_path = None
+    #hmmerpath = HMM_PATH_CONDA
+
     logging.debug("run_hmmer:3====================================================================")
     # Run hmmer as a subprocess
-    if hmmer_path:
+    if hmmerpath:
         logging.debug("run_hmmer:4====================================================================")
-        hmm_scan = os.path.join(hmmer_path, "hmmscan")
+        hmm_scan = os.path.join(hmmerpath, "hmmscan")
         logging.debug("run_hmmer:5====================================================================" + hmm_scan)
     else:
         hmm_scan = "hmmscan"

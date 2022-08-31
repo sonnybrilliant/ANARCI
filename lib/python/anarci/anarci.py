@@ -577,7 +577,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_sco
 
     finally:
         # clear up
-        os.remove(fasta_filename)
+        #os.remove(fasta_filename)
         os.remove(output_filename)
 
     return results

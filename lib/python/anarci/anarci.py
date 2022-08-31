@@ -539,11 +539,12 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_sco
     logging.debug("run_hmmer:3====================================================================")
     # Run hmmer as a subprocess
     if hmmerpath:
-        logging.debug("run_hmmer:4====================================================================")
+        logging.debug("run_hmmer:4:1====================================================================")
         hmm_scan = os.path.join(hmmerpath, "hmmscan")
         logging.debug("run_hmmer:5====================================================================" + hmm_scan)
     else:
-        hmm_scan = "hmmscan"
+        logging.debug("run_hmmer:4:2====================================================================")
+        hmm_scan = "/usr/bin/hmmscan"
     try:
         if ncpu is None:
             command = [hmm_scan, "-o", output_filename, HMM, fasta_filename]

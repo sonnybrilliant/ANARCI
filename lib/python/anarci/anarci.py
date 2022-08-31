@@ -549,9 +549,11 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_sco
         if ncpu is None:
             command = [hmm_scan, "-o", output_filename, HMM, fasta_filename]
             logging.debug("run_hmmer:6====================================================================")
+            logging.debug(command)
         else:
             command = [hmm_scan, "-o", output_filename, "--cpu", str(ncpu), HMM, fasta_filename]
             logging.debug("run_hmmer:7====================================================================")
+            logging.debug(command)
         process = Popen(command, stdout=PIPE, stderr=PIPE, shell=True)
         _, pr_stderr = process.communicate()
 

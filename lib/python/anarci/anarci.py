@@ -515,7 +515,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
     @param hmmerpath: The path to hmmer binaries if not in the path
     @param ncpu: The number of cpu's to allow hmmer to use.
     """
-
+    print("1111111111111111111111111111111====================================================================")
     # Check that hmm_database is available
 
     assert hmm_database in ["ALL"], "Unknown HMM database %s" % hmm_database
@@ -751,6 +751,9 @@ def check_for_j(sequences, alignments, scheme):
     '''
     for i in range(len(sequences)):
         # Check the alignment for J region
+        print("-----------------------------------------------------------------")
+        print(alignments)
+
         if len(alignments[i][1]) == 1:  # Only do for single domain chains.
 
             # Check whether a J region has been identified. If not check whether there is still a considerable amount of sequence   
@@ -882,7 +885,7 @@ def anarci(sequences, scheme="imgt", database="ALL", output=False, outfile=None,
     # Output if necessary
     if output:
         if csv:
-            csv_output(sequences, numbered, details, outfile)
+            csv_output(sequences, numbered, alignment_details, outfile)
         else:
             outto, close = sys.stdout, False
             if outfile:
@@ -1012,7 +1015,7 @@ def number(sequence, scheme="imgt", database="ALL", allow=set(["H", "K", "L", "A
              Otherwise both are False.
 
     """
-
+    print("22222222222222222222222222====================================================================")
     try:
         validate_sequence(sequence)
         scheme = scheme_short_to_long[scheme.lower()]

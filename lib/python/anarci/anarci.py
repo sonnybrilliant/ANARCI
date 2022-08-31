@@ -54,6 +54,7 @@ import sys
 import tempfile
 import gzip
 import math
+import logging
 from functools import partial
 from textwrap import wrap
 from subprocess import Popen, PIPE
@@ -65,6 +66,9 @@ from Bio.SearchIO.HmmerIO import Hmmer3TextParser as HMMERParser
 # Import from the schemes submodule
 from .schemes import *
 from .germlines import all_germlines
+
+logging.basicConfig(level=logging.DEBUG)
+logging.debug('start------------------------------------------------------------------')
 
 all_species = list(all_germlines['V']['H'].keys())
 
@@ -82,7 +86,7 @@ chain_type_to_class = {"H": "H", "K": "L", "L": "L", "A": "A", "B": "B", "G": "G
 HMM_path = os.path.join(anarci_path, "dat", "HMMs")
 
 HMM_PATH_CONDA = "/home/ubuntu/anaconda3/envs/interface38/bin"
-
+logging.debug('path: ' + HMM_PATH_CONDA)
 
 all_reference_states = list(range(1, 129))  # These are the IMGT reference states (matches)
 
@@ -515,7 +519,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
     @param hmmerpath: The path to hmmer binaries if not in the path
     @param ncpu: The number of cpu's to allow hmmer to use.
     """
-    print("1111111111111111111111111111111====================================================================")
+    logging.debug("1111111111111111111111111111111====================================================================")
     # Check that hmm_database is available
 
     assert hmm_database in ["ALL"], "Unknown HMM database %s" % hmm_database
@@ -533,7 +537,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
 
     # Run hmmer as a subprocess
     if hmmerpath:
-        print("====================================================================")
+        logging.debug("====================================================================")
         hmmscan = os.path.join(hmmerpath, "hmmscan")
     else:
         hmmscan = "hmmscan"
@@ -751,8 +755,8 @@ def check_for_j(sequences, alignments, scheme):
     '''
     for i in range(len(sequences)):
         # Check the alignment for J region
-        print("-----------------------------------------------------------------")
-        print(alignments)
+        logging.debug("alignments-----------------------------------------------------------------")
+        logging.debug(alignments)
 
         if len(alignments[i][1]) == 1:  # Only do for single domain chains.
 

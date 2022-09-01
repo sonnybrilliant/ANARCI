@@ -547,7 +547,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_sc
         hmm_scan = "/usr/bin/hmmscan"
     try:
         if ncpu is None:
-            command = [hmm_scan, "-o", " " + output_filename, " " + HMM, " " + fasta_filename]
+            command = [hmm_scan, "-o", " " + output_filename,  HMM,  fasta_filename]
             logging.debug("run_hmmer:6====================================================================")
             logging.debug(command)
         else:

@@ -193,7 +193,7 @@ def anarci_output(numbered, sequences, alignment_details, outfile, sequence_id=N
     If domain_id is specified then sequence_id must also be specified. 
     """
     assert (sequence_id is not None) or (
-                sequence_id is None and domain_id is None), "If domain_id is specified, sequence_id must also be specified."
+            sequence_id is None and domain_id is None), "If domain_id is specified, sequence_id must also be specified."
     for i in range(len(numbered)):
         if sequence_id is None:
             print("# %s" % sequences[i][0], file=outfile)  # print the name
@@ -505,7 +505,7 @@ def parse_hmmer_output(filedescriptor="", bit_score_threshold=80, hmmer_species=
     return results
 
 
-def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_score_threshold=80, hmmer_species=None):
+def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="", ncpu=None, bit_score_threshold=80, hmmer_species=None):
     """
     Run the sequences in sequence list against a precompiled hmm_database.
 
@@ -534,7 +534,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_sco
     output_filehandle, output_filename = tempfile.mkstemp(".txt", text=True)
     logging.debug(output_filehandle)
     logging.debug(output_filename)
-    #hmmerpath = HMM_PATH_CONDA
+    # hmmerpath = HMM_PATH_CONDA
 
     logging.debug("run_hmmer:3====================================================================")
     # Run hmmer as a subprocess
@@ -547,7 +547,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_sco
         hmm_scan = "/usr/bin/hmmscan"
     try:
         if ncpu is None:
-            command = [hmm_scan, "-o", output_filename, HMM, fasta_filename]
+            command = [hmm_scan, "-o", " " + output_filename, " " + HMM, " " + fasta_filename]
             logging.debug("run_hmmer:6====================================================================")
             logging.debug(command)
         else:
@@ -577,7 +577,7 @@ def run_hmmer(sequence_list, hmm_database="ALL", hmmerpath="",ncpu=None, bit_sco
 
     finally:
         # clear up
-        #os.remove(fasta_filename)
+        # os.remove(fasta_filename)
         os.remove(output_filename)
 
     return results
